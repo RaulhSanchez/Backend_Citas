@@ -14,6 +14,15 @@ module.exports = {
       mascota: {
         type: Sequelize.STRING
       },
+      userId:{ 
+        type: Sequelize.INTEGER,
+        references:{
+          model: {
+            tableName: 'users'
+          },
+          key: 'id'
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
