@@ -1,13 +1,10 @@
-
-// const { where } = require('sequelize/types')
 const { User, Appointment } = require('../models/index.js')
 const { Op, DATE } = require("sequelize")
-// const { Module } = require('module')
-// const { Json } = require('sequelize/types/lib/utils')
 const hashing = require('../Middleware/functions')
 const { Console } = require('console')
 
-//creamos usuario
+
+
 module.exports.createUser = async (req, res) => {
     try {
         const newUser = req.body
@@ -84,7 +81,7 @@ module.exports.deleteUser = async (req, res) => {
     }
 }
 //login
-module.exports.loggin = async (req, res) => {
+module.exports.login = async (req, res) => {
     
     try {
         let hashDescoted = await hashing.compareHash(req.body)

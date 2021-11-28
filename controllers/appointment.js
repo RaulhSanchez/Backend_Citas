@@ -76,8 +76,8 @@ module.exports.updateAppointment = async (req, res) => {
 
 module.exports.deleteAppointment = async(req, res) => {
     try{
-       let user = decrypTuser.decryptoken(req.headers.token)
-       await Appointment.destroy({ where: { userId: user.data } })
+        let user = decrypTuser.decryptoken(req.headers.token)
+        await Appointment.destroy({ where: { userId: user.data } })
         res.status(200).json({ Data: 'La cita se ha eliminado.' })
     } catch(error) {
         res.status(400).send({

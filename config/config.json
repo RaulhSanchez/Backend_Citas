@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "adminPassword",
-    "database": "appointment_api",
+    "password": "Raulito-12",
+    "database": "API_CITAS",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

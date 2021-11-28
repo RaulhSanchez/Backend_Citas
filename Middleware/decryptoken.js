@@ -1,8 +1,5 @@
 const jwt = require("jsonwebtoken");
 
-
-
-
 module.exports.role = (req, res,next) => {
   try {
     console.log(req.headers.token)
@@ -10,7 +7,6 @@ module.exports.role = (req, res,next) => {
     console.log(objectRole.role)
     if (objectRole.role !== 'admin'){
       res.json({ error: 'A1516515 eres admin.' })
-     
     }else{
       console.log('aprobado')
       next()

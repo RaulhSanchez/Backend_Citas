@@ -33,7 +33,7 @@ module.exports = {
       age: {
         type: Sequelize.STRING
       },
-      address: {
+      adress: {
         type: Sequelize.STRING
       },
       createdAt: {
