@@ -20,7 +20,7 @@ Antes de desarrollar el Frontend, para poder comprobar que esta aplicación func
 ## Creación de la aplicación.
 
 En la primera parte de este desarrollo, levantamos un servidor en local y creamos una base de  datos para poder comprobar el correcto funcionamiento de la aplicación, migramos el modelo generado y una vez tenemos esto funcional, creamos los archivos siguiendo el patrón MVC para establecer un orden en la logiística de las carpetas y los archivos.Este patrón nos da una facilidad para colocar a las rutas, los modelos y los controloradores como se muestra a continuacion:
-[Imagen MVC](https://github.com/RaulhSanchez/Backend_citas/blob/d39db9910930e4ff6c8b42a30e940eef7f092a79/Captura%20de%20pantalla%202021-12-02%20a%20las%2021.16.55.png)
+![Imagen MVC](https://github.com/RaulhSanchez/Backend_citas/blob/master/MVC.png)
 
 
 ## Creación de Usuarios
