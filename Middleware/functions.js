@@ -1,8 +1,5 @@
 const bcrypt = require('bcrypt');
 const jwToken = require("jsonwebtoken");
-
-
-
 const { User, Appointment } = require('../models/index.js')
 
 //generamos el hash para guardar la contraseña encriptada!
@@ -14,14 +11,16 @@ module.exports.createHash = (password) => {
 
 //function para comparar el hash para guardar la contraseña encriptada!
 module.exports.compareHash = async (objectUser) => {
+    console.log(objectUser)
     try {
+        console.log("entra")
         const project = await User.findOne({ where: { mail: objectUser.mail } });
-        console.log(project.mail + 'es aquí')
-        if (project.mail === null) {
+        console.log(project)
+        if (project === null) {
             console.log(project + 'es aquí 2')
             return false
         }         
-        if (project.mail) {
+        if (project) {
             let compare = bcrypt.compareSync(objectUser.password, project.password)
             console.log(compare)
             if (compare) {

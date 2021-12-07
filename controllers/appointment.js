@@ -1,24 +1,26 @@
-const { User, Appointment, sequelize } = require('../models/index.js')
+const { User, Appointment, Docotor, sequelize } = require('../models/index.js')
 const { Op } = require("sequelize")
 const decrypTuser = require('../Middleware/decryptoken')
 const moment = require("moment");
 const timeFunction = require('../helper/calcularfecha')
 
-// Creamos una cita. (Aquí necesitamos middleware para autenticar USER)
+//Creamos una cita. (Aquí necesitamos middleware para autenticar USER)
 
 module.exports.createAppointment = async (req, res) => {
     try {
         let user = decrypTuser.decryptoken(req.headers.token)
+        console.log(req.body.date)
         let verifyTime = timeFunction.difTime(req.body.date)
-        if (verifyTime === false) {
-            res.send('Fecha inválida.')
-        } else {
+        console.log(verifyTime)
+        if (verifyTime !== false) {
             let respond = await Appointment.create({
                 date: verifyTime,
                 state: 'Pending',
-                userId: user.data,
+                userId: user.data
             })
             res.status(200).json({ data: respond });
+        } else {
+            res.send('Fecha inválida.')
         }
     } catch (error) {
         res.status(400).send({
@@ -28,6 +30,7 @@ module.exports.createAppointment = async (req, res) => {
         });
     }
 }
+
 
 // Buscamos todas las citas. (Aquí necesitamos middleware para autenticar ADMIN)
 

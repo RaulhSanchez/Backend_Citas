@@ -1,4 +1,4 @@
-const { User, Appointment } = require('../models/index.js')
+const { User, Appointment, Pet } = require('../models/index.js')
 const { Op, DATE } = require("sequelize")
 const hashing = require('../Middleware/functions')
 const { Console } = require('console')
@@ -93,5 +93,16 @@ module.exports.login = async (req, res) => {
             errors: error,
             status: 400
         })
+    }
+}
+
+
+module.exports.getPetByUser = async (req,res) => {
+    try{
+    let user = decrypTuser.decryptoken(req.headers.token)
+    let list = await User.findfk(Pet.userId)
+    res.status(200).json({data:list})
+    }catch{
+        console.log("error")
     }
 }

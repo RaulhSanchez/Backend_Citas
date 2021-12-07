@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       date: {
-        type: Sequelize.FLOAT
+        type: Sequelize.STRING
       },
       state: {
         type: Sequelize.STRING
