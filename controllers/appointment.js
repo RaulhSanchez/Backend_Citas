@@ -9,14 +9,16 @@ const timeFunction = require('../helper/calcularfecha')
 module.exports.createAppointment = async (req, res) => {
     try {
         let user = decrypTuser.decryptoken(req.headers.token)
-        console.log(req.body.date)
+        console.log(req.body)
         let verifyTime = timeFunction.difTime(req.body.date)
         console.log(verifyTime)
         if (verifyTime !== false) {
             let respond = await Appointment.create({
                 date: verifyTime,
                 state: 'Pending',
-                userId: user.data
+                userId: user.data,
+                doctorId: req.body.doctor,
+                petId: req.body.pets
             })
             res.status(200).json({ data: respond });
         } else {

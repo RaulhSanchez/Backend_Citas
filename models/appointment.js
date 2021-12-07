@@ -1,19 +1,19 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const {Model} = require('sequelize');
 // const {user}=require('./index')
 module.exports = (sequelize, DataTypes) => {
   class Appointment extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
+      
       Appointment.belongsTo(models.User, { // un usario se puede replicar muchas veces
         foreignKey: 'userId',
       });
+      Appointment.belongsTo(models.Doctor, { // un doctor se puede replicar muchas veces
+        foreignKey: 'doctorId',
+      })
+      Appointment.belongsTo(models.Pet, { // un animal se puede replicar muchas veces
+        foreignKey: 'petId',
+      })
     };
   };
   Appointment.init({

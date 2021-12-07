@@ -23,5 +23,5 @@ app.use("/pet",petRouter)
 app.use("/doctor",doctorRouter)
 
 
-app.listen(process.env.PORT, () => console.log('Funcionando'))
 console.log(process.env.PORT)
+app.listen(process.env.PORT, () => console.log('Funcionando'))

@@ -24,6 +24,24 @@ module.exports = {
           key: 'id'
         }
       },
+      doctorId:{ 
+        type: Sequelize.INTEGER,
+        references:{
+          model: {
+            tableName: 'doctors'
+          },
+          key: 'id'
+        }
+      },
+      petId:{ 
+        type: Sequelize.INTEGER,
+        references:{
+          model: {
+            tableName: 'pets'
+          },
+          key: 'id'
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
