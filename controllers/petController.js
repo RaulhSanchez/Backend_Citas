@@ -32,7 +32,6 @@ module.exports.getAllPet = async (req,res) => {
 
 module.exports.getPetByUser = async (req,res) => {
     try{
-        
         let user = decrypTuser.decryptoken(req.headers.token)
         if(user === false){res.status(400).json("no eres el usuario")}
         else{

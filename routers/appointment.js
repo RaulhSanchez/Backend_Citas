@@ -5,6 +5,7 @@ const checkRole = require('../Middleware/decryptoken')
 const checkToken = require('../Middleware/functions')
 
 
+router.get("/user",controller.searchByUser)
 router.post('/appointment',controller.createAppointment); // Método para crear la cita.//funciona
 router.get('/all',checkToken.verificarToken,controller.searchAll); // Método para poder ver todas las citas. (Solo para ADMIN) //funciona
 router.put('/',checkToken.verificarToken ,controller.updateAppointment); // Método para modificar la fecha.

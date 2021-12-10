@@ -49,6 +49,22 @@ module.exports.searchAll = async (req, res) => {
     }
 }
 
+module.exports.searchByUser = async (req, res) => {
+    try {
+        let user = decrypTuser.decryptoken(req.headers.token)
+        if(user === false){res.status(400).json({error:"no eres el usuario"})}
+        else{
+            let list = await Appointment.findAll({where:{userId:user.data}})
+            res.status(200).json({ Data: list })
+        }
+    } catch (error) {
+        res.status(400).send({
+            message: 'No tienes citas pendientes.',
+            status: 400
+        });
+    }
+}
+
 //Buscamos citas por estado 'pending'
 
 module.exports.searchAllPending = async (req, res) => {
