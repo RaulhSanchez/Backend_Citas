@@ -23,7 +23,6 @@ module.exports.createPet = async (req,res) => {
 
 module.exports.getAllPet = async (req,res) => {
     try {
-        let user = decrypTuser.decryptoken(req.headers.token)
         let listPet = await Pet.findAll({})
         res.status(200).json({data: listPet})
     } catch (error) {
@@ -33,9 +32,13 @@ module.exports.getAllPet = async (req,res) => {
 
 module.exports.getPetByUser = async (req,res) => {
     try{
-    let user = decrypTuser.decryptoken(req.headers.token)
-    let list = await Pet.find("userId")
-    res.status(200).json({data:list})
+        
+        let user = decrypTuser.decryptoken(req.headers.token)
+        if(user === false){res.status(400).json("no eres el usuario")}
+        else{
+            let list = await Pet.findAll({where:{userId:user.data}})
+            res.status(200).json({data:list})
+        }
     }catch{
         console.log("error")
     }

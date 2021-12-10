@@ -46,7 +46,7 @@ module.exports.verificarToken = (req, res, next) => {
         jwToken.verify(token, process.env.TOKEN)
         next()
     } catch (error) {
-        console.log(error)
+        console.log("no es el token bueno")
     }
 }
 

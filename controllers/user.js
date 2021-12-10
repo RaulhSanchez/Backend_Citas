@@ -95,14 +95,3 @@ module.exports.login = async (req, res) => {
         })
     }
 }
-
-
-module.exports.getPetByUser = async (req,res) => {
-    try{
-    let user = decrypTuser.decryptoken(req.headers.token)
-    let list = await User.findfk(Pet.userId)
-    res.status(200).json({data:list})
-    }catch{
-        console.log("error")
-    }
-}
