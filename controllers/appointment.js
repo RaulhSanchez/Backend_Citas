@@ -110,14 +110,15 @@ module.exports.deleteAppointment = async(req, res) => {
 
 module.exports.deleteOne = async (req, res) => {
     try{
-        let dateDelete = req.body
         let user = decrypTuser.decryptoken(req.headers.token)
+        let dateDelete = req.body
+        console.log(dateDelete.AppointementDelete)
         await Appointment.destroy({
             where: {
                 userId: user.data,
-                date:dateDelete.AppointementDelete
+                date:dateDelete.date
             } })
-        res.status(200).json({ data: `La cita se ha eliminado con éxito a : ${req.body.AppointementDelete}` });
+        res.status(200).json({ data: `La cita se ha eliminado c©on éxito ` });
     } catch(error) {
         res.status(400).send({
             message: 'Ha habido un problema.',

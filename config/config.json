@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "Raulito-12",
+    "password": "root-1992",
     "database": "API_CITAS",
     "host": "127.0.0.1",
     "dialect": "mysql"
