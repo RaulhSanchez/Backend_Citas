@@ -38,7 +38,7 @@ module.exports.createAppointment = async (req, res) => {
 module.exports.searchAll = async (req, res) => {
     try {
         let user = decrypTuser.decryptoken(req.headers.token)
-        let listAppointment = await Appointment.find({userId:user.data})
+        let listAppointment = await Appointment.findAll({userId:user.data})
         console.log(listAppointment)
         res.status(200).json({ Data: listAppointment })
     } catch (error) {
@@ -82,8 +82,8 @@ module.exports.searchAllPending = async (req, res) => {
 // // Modificación de la cita, por alguna otra fecha//mejorar
 module.exports.updateAppointment = async (req, res) => {
     try {
-        await Appointment.update({ date: req.body.fechaModificar }, {
-        where: { date: req.body.fechaActual }
+        await Appointment.update({ date: req.body.oldDate }, {
+        where: { date: req.body.newDate }
         })
         res.status(200).json({ data: 'La fecha se ha ejecutado con éxito a : ${req.body.fechaModificar}' });
     } catch (error) {
@@ -118,7 +118,7 @@ module.exports.deleteOne = async (req, res) => {
                 userId: user.data,
                 date:dateDelete.date
             } })
-        res.status(200).json({ data: `La cita se ha eliminado c©on éxito ` });
+        res.status(200).json({ data: `La cita se ha eliminado con éxito ` });
     } catch(error) {
         res.status(400).send({
             message: 'Ha habido un problema.',
@@ -126,3 +126,4 @@ module.exports.deleteOne = async (req, res) => {
         });
     }
 }
+

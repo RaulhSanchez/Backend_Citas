@@ -21,6 +21,7 @@
     "jwt-redis": "^6.0.0",
     "moment": "^2.29.1",
     "mysql2": "^2.3.2",
+    "package": "^1.0.1",
     "redis": "^4.0.0",
     "sequelize": "^6.11.0",
     "sequelize-cli": "^6.3.0"

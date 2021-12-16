@@ -1,9 +1,14 @@
 const bcrypt = require('bcrypt');
+const redis = require("redis");
 const jwToken = require("jsonwebtoken");
+const redisClient = redis.createClient();
+const JWTR =  require('jwt-redis').default;
+const jwtr = new JWTR(redisClient);
 const { User, Appointment } = require('../models/index.js')
 
 //generamos el hash para guardar la contraseña encriptada!
 const moment = require("moment");
+const { default: JWTRedis } = require('jwt-redis');
 module.exports.createHash = (password) => {
     let encrypted = bcrypt.hashSync(password, 10)
     return encrypted
@@ -13,7 +18,6 @@ module.exports.createHash = (password) => {
 module.exports.compareHash = async (objectUser) => {
     console.log(objectUser)
     try {
-        console.log("entra")
         const project = await User.findOne({ where: { mail: objectUser.mail } });
         console.log(project)
         if (project === null) {
@@ -40,7 +44,6 @@ module.exports.compareHash = async (objectUser) => {
 }
 //verificaToken
 module.exports.verificarToken = (req, res, next) => {
-
     try {
         const token = req.headers.token
         jwToken.verify(token, process.env.TOKEN)
@@ -50,7 +53,14 @@ module.exports.verificarToken = (req, res, next) => {
     }
 }
 
-module.exports.logout = (req, res, next) => {
-    const token = req.headers.token
-    jwToken.destroy(token)
-}
+// module.exports.logout = async (req, res) => {
+//     try{
+//         const token = await req.headers.token
+//         console.log(token)
+//         if(token){
+//              jwtr.destroy(req.headers.token)
+//         }else("Error")
+//     }catch{
+//         console.log("error")
+//     }
+// }
