@@ -50,10 +50,10 @@ module.exports.searchUser = (req, res) => {
 }
 // Buscamos todos los usarios
 module.exports.searchAll = async (req, res) => {
-
     try {
-        let users = await User.findAll({})
-        res.status(200).json({ Data: users })
+        let listUsers = await User.findAll({})
+        console.log(listUsers)
+        res.status(200).json({ Data: listUsers })
     } catch (error) {
         res.json({
             message: 'No eres admin.',
@@ -85,8 +85,25 @@ module.exports.login = async (req, res) => {
     
     try {
         let hashDescoted = await hashing.compareHash(req.body)
-        console.log(hashDescoted)
-        res.status(200).json({ hashDescoted })
+        
+            res.status(200).json({ hashDescoted })
+        
+    } catch (error) {
+        res.json({
+            message: 'mail or password denegado.',
+            errors: error,
+            status: 400
+        })
+    }
+}
+
+module.exports.loginAdmin = async (req, res) => {
+    
+    try {
+        let hashDescoted = await hashing.compareHashADmin(req.body)
+        
+            res.status(200).json({ hashDescoted })
+        
     } catch (error) {
         res.json({
             message: 'mail or password denegado.',

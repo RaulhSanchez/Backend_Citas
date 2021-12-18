@@ -16,17 +16,15 @@ module.exports.createHash = (password) => {
 
 //function para comparar el hash para guardar la contraseña encriptada!
 module.exports.compareHash = async (objectUser) => {
-    console.log(objectUser)
     try {
         const project = await User.findOne({ where: { mail: objectUser.mail } });
-        console.log(project)
         if (project === null) {
             console.log(project + 'es aquí 2')
             return false
-        }         
+        }
+        if(project.role === "user"){ 
         if (project) {
             let compare = bcrypt.compareSync(objectUser.password, project.password)
-            console.log(compare)
             if (compare) {
                 const payload = {
                     data: project.id,
@@ -34,10 +32,35 @@ module.exports.compareHash = async (objectUser) => {
                     iat: moment().unix(),
                     exp: moment().add(1, 'days').unix()
                 }
-                console.log(process.env.TOKEN)
                 return jwToken.sign(payload, process.env.TOKEN)
             }
         }
+    }
+    } catch (error) {
+        console.log(error)
+    }
+}
+module.exports.compareHashADmin = async (objectUser) => {
+    try {
+        const project = await User.findOne({ where: { mail: objectUser.mail } });
+        if (project === null) {
+            console.log(project + 'es aquí 2')
+            return false
+        }
+        if(project.role === "admin"){ 
+        if (project) {
+            let compare = bcrypt.compareSync(objectUser.password, project.password)
+            if (compare) {
+                const payload = {
+                    data: project.id,
+                    role: project.role,
+                    iat: moment().unix(),
+                    exp: moment().add(1, 'days').unix()
+                }
+                return jwToken.sign(payload, process.env.TOKEN)
+            }
+        }
+    }
     } catch (error) {
         console.log(error)
     }

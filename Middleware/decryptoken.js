@@ -20,7 +20,6 @@ module.exports.role = (req, res,next) => {
 module.exports.decryptoken = (user) => {
   
   let objectUser = jwt.decode(user)
-  console.log(objectUser)
   console.log(objectUser+ 'decri')
   return objectUser
 }
